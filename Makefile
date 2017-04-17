@@ -8,4 +8,4 @@ run:
 clear:
 	clear
 gitadd:
-	git add Makefile in.txt lexical_an.l
+	git add Makefile in.txt lexical_an.l lexical_an.h lexical_analyzer.cpp
