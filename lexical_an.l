@@ -8,16 +8,30 @@ int type = -1;
 %}
 
 %%
-[\n|\t|\r|" "] {};
-"if" { return PALAVRA_RESERVADA;}
-[0-9]*[.][0-9]+ {return NUMERO_REAL;}
-[0-9]+ {return NUMERO_INTEIRO;}
+
+[\n|\t|\r|" "] { };
+
+["if"|"program"|"begin"|"end"|"const"|"var"|"real"|"integer"|"procedure"|"else"|"while"|"do"|"if"|"then"|"for"|"to"|"read"|"write"] 
+{ 
+	return PALAVRA_RESERVADA;
+}
+
+[0-9]*[.][0-9]+ { return NUMERO_REAL;}
+ 
+[0-9]+ { return NUMERO_INTEIRO;}
+
 [a-zA-Z][a-zA-Z0-9]* { return IDENTIFICADOR;}
-[0-9]+[a-zA-Z|.]+[a-zA-Z0-9|.]* { return NUMERO_MALFORMATADO;}
+
+[0-9]+[a-zA-Z|.]+[a-zA-Z0-9|.]* { type = NUMERO_MALFORMATADO;}
+
 "(" { type = ABRE_PAREN; return SIMBOLO;}
+
 ";" { type = PONTO_VIRGULA; return SIMBOLO;}
+
 "." { type = PONTO; return SIMBOLO;}
+
 . {return NAO_RECONHECIDO;}
+
 %%
 
 int yywrap()
@@ -40,3 +54,7 @@ int main(void)
 	printf("=================\n");
 	return 0;
 }
+
+
+
+
